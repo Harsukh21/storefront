@@ -1,0 +1,112 @@
+/* Front website specific utilities */
+
+.front-hero-gradient {
+    background: linear-gradient(180deg, rgba(245, 248, 255, 0.98) 0%, rgba(245, 248, 255, 0.94) 55%, rgba(238, 242, 255, 1) 100%);
+}
+
+html.dark .front-hero-gradient {
+    background: linear-gradient(180deg, rgba(6, 11, 27, 0.95) 0%, rgba(6, 11, 27, 0.9) 55%, rgba(16, 26, 51, 1) 100%);
+}
+
+.front-glow::before {
+    content: '';
+    position: absolute;
+    inset: -2.5rem;
+    border-radius: 9999px;
+    background: radial-gradient(circle at center, rgba(41, 255, 198, 0.35), transparent 60%);
+    filter: blur(32px);
+    z-index: -1;
+}
+
+.front-nav-link {
+    position: relative;
+    transition: color 150ms ease;
+}
+
+.front-nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.35rem;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--sf-accent-primary), var(--sf-accent-secondary));
+    transition: width 150ms ease;
+}
+
+.front-nav-link:hover::after,
+.front-nav-link:focus-visible::after {
+    width: 100%;
+}
+
+.front-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.75rem;
+    background: var(--sf-bg-secondary);
+    border: 1px solid var(--sf-border);
+    transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.front-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--sf-accent-primary);
+    box-shadow: 0 35px 65px -45px var(--sf-shadow);
+}
+
+html.dark .front-card {
+    background: rgba(16, 26, 51, 0.92);
+}
+
+.front-mobile-menu {
+    display: none;
+    gap: 1rem;
+}
+
+.front-mobile-link {
+    display: block;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--sf-border);
+}
+
+.front-mobile-link:last-child {
+    border-bottom: none;
+}
+
+.front-mobile-menu.front-mobile-open {
+    display: flex;
+    flex-direction: column;
+}
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    border: 1px solid var(--sf-border);
+    background: var(--sf-bg-secondary);
+    color: var(--sf-text-primary);
+    transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+    border-color: var(--sf-accent-secondary);
+    color: var(--sf-accent-secondary);
+}
+
+/* Ensure dropdown menus are not clipped */
+header {
+    overflow: visible !important;
+}
+
+header > div {
+    overflow: visible !important;
+}
+
+/* User dropdown menu */
+[x-data] {
+    overflow: visible !important;
+}

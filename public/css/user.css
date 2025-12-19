@@ -1,0 +1,55 @@
+/* User Panel Styles */
+
+.user-shell {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.dark .user-shell {
+    background: linear-gradient(135deg, #060b1b 0%, #101a33 100%);
+}
+
+.user-card {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(214, 220, 255, 0.6);
+    border-radius: 0.75rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.dark .user-card {
+    background: rgba(16, 26, 51, 0.8);
+    border-color: rgba(114, 138, 221, 0.25);
+}
+
+.user-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(41, 255, 198, 0.1);
+}
+
+.dark .user-card:hover {
+    box-shadow: 0 10px 25px rgba(41, 255, 198, 0.15);
+}
+
+/* Sidebar Styles */
+#user-sidebar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.dark #user-sidebar {
+    background: rgba(16, 26, 51, 0.95);
+}
+
+/* Submenu Transitions */
+.submenu {
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* Mobile Sidebar Overlay */
+#sidebar-overlay {
+    pointer-events: none;
+}
+
+#sidebar-overlay.opacity-100 {
+    pointer-events: all;
+}
