@@ -3,20 +3,18 @@
 @section('content')
 <div class="w-full">
     <!-- Page Header -->
-    <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div class="flex items-center gap-3">
-            <a href="{{ route('admin.catalog.products.edit', $product->id) }}" class="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200">
-                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
-            </a>
-            <div>
-                <h1 class="text-2xl font-semibold text-slate-900 dark:text-slate-100">Product Variants</h1>
-                <p class="text-sm text-slate-500 dark:text-slate-400">Manage variants for {{ $product->name }}</p>
-            </div>
-        </div>
-        <div class="flex gap-3">
-            <a href="{{ route('admin.catalog.products.edit', $product->id) }}" class="rounded-lg border border-sf-border/60 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-sf-accent-primary dark:border-[rgba(114,138,221,0.35)] dark:bg-sf-night-800 dark:text-slate-200">Edit Product</a>
+    <div class="mb-8 flex items-center gap-3">
+        <a 
+            href="{{ route('admin.catalog.products.edit', $product->id) }}" 
+            class="flex h-10 w-10 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-sf-night-900 dark:hover:text-slate-200"
+        >
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+        </a>
+        <div>
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100">Product Variants</h1>
+            <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">Manage variants for {{ $product->name }}</p>
         </div>
     </div>
 
@@ -172,6 +170,7 @@
         </div>
     </div>
 </div>
+@endsection
 
 @section('scripts')
 <script>

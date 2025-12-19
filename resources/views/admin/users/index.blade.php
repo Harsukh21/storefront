@@ -6,7 +6,9 @@
 <div class="w-full" x-data="{ 
     filterDrawerOpen: false,
     activeFilters: {{ !empty(request('search')) || !empty(request('status')) ? 1 : 0 }}
-}">
+}" 
+x-effect="document.body.style.overflow = filterDrawerOpen ? 'hidden' : ''"
+:class="{ 'pointer-events-none': filterDrawerOpen }">
     <!-- Page Header with Filter Toggle -->
     <div class="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
@@ -21,7 +23,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
             </svg>
             Filters
-            <span x-show="activeFilters > 0" class="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-sf-accent-primary text-xs font-bold text-sf-night-900" x-cloak>{{ activeFilters }}</span>
+            <span x-show="activeFilters > 0" x-text="activeFilters" class="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-sf-accent-primary text-xs font-bold text-sf-night-900" x-cloak></span>
         </button>
     </div>
 
@@ -139,10 +141,11 @@
         x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="fixed inset-0 z-50 overflow-hidden"
+        class="fixed inset-0 z-[100] overflow-hidden"
+        style="pointer-events: auto;"
     >
         <!-- Backdrop -->
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="filterDrawerOpen = false"></div>
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="filterDrawerOpen = false" style="pointer-events: auto;"></div>
         
         <!-- Drawer -->
         <div 
@@ -153,6 +156,8 @@
             x-transition:leave-start="translate-x-0"
             x-transition:leave-end="translate-x-full"
             class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl dark:bg-sf-night-800"
+            style="pointer-events: auto;"
+            @click.stop
         >
             <div class="flex h-full flex-col">
                 <!-- Drawer Header -->
