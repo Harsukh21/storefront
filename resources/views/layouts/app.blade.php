@@ -51,6 +51,23 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
         [x-cloak] { display: none !important; }
+        
+        /* Circular Reveal Animation - Matching sitestash.org */
+        /* Content never disappears - overlay uses mix-blend-mode to create effect without hiding content */
+        .theme-transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 999999;
+            pointer-events: none;
+            clip-path: circle(0% at 50% 50%);
+            transition: clip-path 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Use mix-blend-mode so overlay doesn't hide content - creates reveal effect */
+            mix-blend-mode: difference;
+            background: #ffffff;
+        }
     </style>
     @yield('head')
 </head>

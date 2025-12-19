@@ -10,6 +10,7 @@ use App\Http\Controllers\FrontWebsite\ProductQuestionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('front.home');
+Route::view('/test/theme-toggle-demo', 'test.theme-toggle-demo')->name('test.theme-toggle-demo');
 Route::view('/about', 'frontwebsite.pages.about')->name('front.about');
 Route::view('/contact', 'frontwebsite.pages.contact')->name('front.contact');
 Route::view('/privacy-policy', 'frontwebsite.pages.privacy')->name('front.privacy');

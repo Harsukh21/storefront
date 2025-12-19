@@ -193,8 +193,8 @@ x-effect="document.body.style.overflow = filterDrawerOpen ? 'hidden' : ''"
         class="fixed inset-0 z-[100] overflow-hidden"
         style="pointer-events: auto;"
     >
-        <!-- Backdrop -->
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="filterDrawerOpen = false" style="pointer-events: auto;"></div>
+        <!-- Backdrop - covers entire screen including header -->
+        <div class="fixed inset-0 bg-black/50 backdrop-blur-md" @click="filterDrawerOpen = false" style="pointer-events: auto; z-index: 1;"></div>
         
         <!-- Drawer -->
         <div 
@@ -204,8 +204,8 @@ x-effect="document.body.style.overflow = filterDrawerOpen ? 'hidden' : ''"
             x-transition:leave="transition ease-in duration-200 transform"
             x-transition:leave-start="translate-x-0"
             x-transition:leave-end="translate-x-full"
-            class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl dark:bg-sf-night-800"
-            style="pointer-events: auto;"
+            class="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl dark:bg-sf-night-800"
+            style="pointer-events: auto; z-index: 2;"
             @click.stop
         >
             <div class="flex h-full flex-col">

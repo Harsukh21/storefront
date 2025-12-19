@@ -16,12 +16,70 @@
 
     applyTheme(initialTheme);
 
+    // Circular reveal animation - matching sitestash.org
+    // Content never disappears - overlay creates visual effect without hiding content
+    const createCircularReveal = (event, targetTheme) => {
+        const button = event?.target?.closest('.theme-toggle') || event?.target;
+        if (!button) return false;
+
+        // Get button position
+        const rect = button.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        
+        // Calculate maximum distance to cover entire screen
+        const maxDistance = Math.max(
+            Math.hypot(x, y),
+            Math.hypot(window.innerWidth - x, y),
+            Math.hypot(x, window.innerHeight - y),
+            Math.hypot(window.innerWidth - x, window.innerHeight - y)
+        );
+
+        // CRITICAL: Apply theme FIRST synchronously - content transitions immediately, never disappears
+        localStorage.setItem(storageKey, targetTheme);
+        applyTheme(targetTheme);
+
+        // Create overlay immediately - uses mix-blend-mode: difference so content never disappears
+        // The overlay creates the circular reveal visual effect without hiding/blocking content
+        const overlay = document.createElement('div');
+        overlay.className = 'theme-transition-overlay';
+        overlay.style.cssText = `
+            clip-path: circle(0% at ${x}px ${y}px);
+        `;
+        
+        document.body.appendChild(overlay);
+        
+        // Trigger animation immediately on next frame
+        // Content is already transitioning smoothly underneath - overlay just creates visual effect
+        requestAnimationFrame(() => {
+            overlay.style.clipPath = `circle(${maxDistance * 1.2}px at ${x}px ${y}px)`;
+        });
+
+        // Remove overlay after animation completes
+        setTimeout(() => {
+            overlay.style.opacity = '0';
+            overlay.style.transition = 'opacity 0.15s ease-out';
+            setTimeout(() => {
+                overlay.remove();
+            }, 150);
+        }, 600);
+
+        return true;
+    };
+
     window.StorefrontTheme = {
-        toggle() {
+        toggle(event) {
             const current = root.classList.contains('dark') ? 'dark' : 'light';
             const next = current === 'dark' ? 'light' : 'dark';
-            localStorage.setItem(storageKey, next);
-            applyTheme(next);
+            
+            // Create circular reveal animation
+            const hasTransition = createCircularReveal(event, next);
+            
+            if (!hasTransition) {
+                // Fallback without animation
+                localStorage.setItem(storageKey, next);
+                applyTheme(next);
+            }
         },
         set(theme) {
             const next = clampTheme(theme);
